@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-sm-12 bg-orange">
+        <h2 class="display-5 text-center">Koronavirus ve státech</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    {% for state in page_obj %}
+    <div class="col-sm-2">
+        <div class="card">
+            {% if state.vlajka %}
+                <img class="card-img-top" src="{{ state.vlajka.url }}" alt="{{ state.nazev_statu }}" style="max-height: 192px">
+            {% else %}
+                <img class="card-img-top" src="../../media/image-not-found/NoImageFound.png" alt="Neznámá vlajka státu" style="max-height: 192px">
+            {% endif %}
+            <div class="card-body">
+                <h4 class="card-title">{{ state.nazev_statu }}</h4>
+                <p><strong>Počet obyvatel:</strong> {{ state.pocet_obyvatel }}</p>
+                <p><strong>Počet nakažených:</strong> {% for nakazen in state.nakazeni.all %}{{ nakazen.pocet_nakazenych }}{% endfor %}</p>
+                <p><strong>Počet naočkovaných:</strong> {% for ockovan in state.naockovani.all %}{{ ockovan.pocet_naockovanych }}{% endfor %}</p>
+                <a href="{% url 'stat_detail' state.pk %}" class="btn btn-primary bg-green">Podrobnosti</a>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    <div class="col-md-2"></div>
+
+    <!--    Paginator       -->
+<div class="pagination" style="margin: auto; margin-top: 30px">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="prvni_posledni">&laquo; První</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="predchozi_dalsi">Předchozí</a>
+        {% endif %}
+
+        <span class="current">
+            Strana {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="predchozi_dalsi">Další</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="prvni_posledni">Poslední &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <strong>Celkový počet států:</strong> {{ num_stat }}
+    </div>
+</div>
+{% endblock %}

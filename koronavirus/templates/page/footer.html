@@ -1,0 +1,19 @@
+<div class="text-center">
+    <hr>
+    <p>2021 - Jan Čech</p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    let pathname = window.location.pathname;
+    if (pathname == "/koronavirus/graf/") {
+        $(".nav-link").removeClass("active")
+        $("#graf-stranka").addClass("active")
+    }
+    if (pathname == "/koronavirus/") {
+        $(".nav-link").removeClass("active")
+        $("#uvod-stranka").addClass("active")
+    }
+    else {
+        $(".nav-link").removeClass("active")
+    }
+</script>

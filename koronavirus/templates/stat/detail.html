@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Detail státu{% endblock %}
+{% block css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../static/css/style.css" media="screen" />
+{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-sm-12 bg-orange">
+        <h2 class="display-5 text-center">Informace o státu</h2>
+    </div>
+</div>
+<div class="row mt-5 mb-3">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 mb-3">
+
+        <div class="bg-yellow text-light p-2 mb-3 row">
+            <h2 class="display-4 mb-3" style="font-weight: 500">{{ stat_detail.nazev_statu }}</h2>
+            <div style="margin-left: auto; color: black">
+                <b><em>Počet obyvatel:</em></b> {{ stat_detail.pocet_obyvatel }}
+                <br> <b><em>Rozloha:</em></b> {{ stat_detail.rozloha }} km<sup>2</sup>
+                <br> <b><em>Forma státu:</em></b> {{ stat_detail.forma_statu }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">{{ stat_detail.text }}</div>
+            {% if stat_detail.vlajka %}
+                <div class="col-md-3">
+                    <img src="{{ stat_detail.vlajka.url }}" class="img-fluid" alt="Vlajka státu">
+                </div>
+                {% else %}
+                <p class="alert alert-info" style="left: 20px; height: 50px">Vlajka není nahraná do databáze</p>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+<script>
+    $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
+{% endblock %}

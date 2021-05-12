@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--<link rel="stylesheet" type="text/css" href="../../static/css/style.css" media="screen" />-->
+
+<div class="row mb-3">
+    <div class="col-sm-12 bg-orange">
+        <h2 class="display-5 text-center">Koronavirus graf</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-8">
+        <dl>
+            <dt style="margin-bottom: 30px">Koronavirus procentuálně ve státech na počet obyvatel</dt>
+            {% for state in stat %}
+
+                {% for nakazen in state.nakazeni.all %}
+                    {% with pocet_nakazenych=nakazen.pocet_nakazenych obyvatele=state.pocet_obyvatel%}
+
+                        <!--<dd class="percentage">{{ pocet_nakazenych }} {{obyvatele}} {% widthratio pocet_nakazenych obyvatele 100 %}</dd>-->
+                <dd class="percentage percentage-{% widthratio pocet_nakazenych obyvatele 100 %}">
+                    <span class="text">{{ state.nazev_statu }}: {% widthratio pocet_nakazenych obyvatele 100 %}%</span>
+                </dd>
+                    {% endwith %}
+                {% endfor %}
+            {% endfor %}
+        </dl>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <strong>Celkový počet států:</strong> {{ num_stat }}
+    </div>
+</div>
+{% endblock %}

@@ -1,1 +1,1 @@
-#Vlastní webová aplikace v Django
+# Vlastní webová aplikace v Django

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md bg-red navbar-dark">
+  <!-- Brand -->
+  <span class="navbar-brand text-blue"><b>Koronavirus</b></span>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'index' %}" id="uvod-stranka">Úvodní stránka</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'graf' %}" id="graf-stranka">Graf</a>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Nakaženi</a>-->
+<!--      </li>-->
+    </ul>
+  </div>
+</nav>
