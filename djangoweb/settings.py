@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'koronavirus',
     'mathfilters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Detail státu{% endblock %}
 {% block css %}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../static/css/style.css" media="screen" />
 {% endblock %}
 
@@ -37,14 +36,10 @@
     </div>
     <div class="col-lg-2"></div>
 </div>
-{% endblock %}
 
-{% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
-<script>
-    $(document).on("click", '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-</script>
+
+<a href="{% url 'stat_update' stat_detail.pk %}" class="btn btn-primary">Editovat stát</a>
+<a href="{% url 'stat_delete' stat_detail.pk %}" class="btn btn-danger">Smazat stát</a>
+
+
 {% endblock %}

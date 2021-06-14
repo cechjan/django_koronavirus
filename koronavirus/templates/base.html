@@ -9,9 +9,12 @@
     <!-- Add additional CSS in static file -->
     {% load static %}
     {% block css %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<!--        <link rel="stylesheet" type="text/css" href="../../static/css/style.css" media="screen" />-->
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="screen" />
     {% endblock %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" media="screen" />
+<!--    <link rel="stylesheet" href="{% static 'css/styles.css' %}">-->
+<!--    <link rel="stylesheet" type="text/css" href="../../static/css/style.css" media="screen" />-->
 </head>
 <body>
     <!-- Header -->
