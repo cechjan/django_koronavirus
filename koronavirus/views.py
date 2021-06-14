@@ -80,4 +80,6 @@ class StatUpdateView(UpdateView):
 
 class StatDeleteView(DeleteView):
     model = Stat
-    success_url = reverse_lazy('stat_detail')
+    context_object_name = 'stat'
+    template_name = 'stat/stat_confirm_delete.html'
+    success_url = reverse_lazy('index')

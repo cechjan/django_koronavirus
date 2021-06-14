@@ -51,8 +51,11 @@
 
 </div>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-11">
         <strong>Celkový počet států:</strong> {{ num_stat }}
+    </div>
+    <div>
+        <a href="{% url 'stat_create' %}" class="btn btn-success">Nový stát</a>
     </div>
 </div>
 {% endblock %}
