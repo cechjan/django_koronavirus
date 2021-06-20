@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django import forms
 
 from .models import Stat
 
@@ -22,7 +23,10 @@ class StatModelForm(ModelForm):
 
     class Meta:
         model = Stat
-        fields = ['nazev_statu', 'zkratka_statu', 'vlajka', 'forma_statu', 'pocet_obyvatel', 'rozloha', 'text']
+        fields = ['nazev_statu', 'zkratka_statu', 'vlajka', 'forma_statu', 'pocet_obyvatel', 'rozloha', 'text',
+                  'nakazeni', 'naockovani']
         labels = {'nazev_statu': 'Název státu', 'zkratka_statu': 'Zkratka státu', 'vlajka': 'Obrázek vlajky',
                   'forma_statu': 'Forma státu', 'pocet_obyvatel': 'Počet obyvatel',
-                  'rozloha': 'Rozloha (v kilometrech čtverečních)', 'text': "O státu"}
+                  'rozloha': 'Rozloha (v kilometrech čtverečních)', 'text': "O státu", 'nakazeni': 'Počet nakažených',
+                  'naockovani': 'Počet naočkovaných'}
+

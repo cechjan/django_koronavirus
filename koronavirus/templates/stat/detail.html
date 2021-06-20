@@ -15,11 +15,20 @@
     <div class="col-lg-8 mb-3">
 
         <div class="bg-yellow text-light p-2 mb-3 row">
-            <h2 class="display-4 mb-3" style="font-weight: 500">{{ stat_detail.nazev_statu }}</h2>
+            <h2 class="display-4 mb-3" style="font-weight: 500; align-self: flex-end;">{{ stat_detail.nazev_statu }}</h2>
             <div style="margin-left: auto; color: black">
                 <b><em>Počet obyvatel:</em></b> {{ stat_detail.pocet_obyvatel }}
                 <br> <b><em>Rozloha:</em></b> {{ stat_detail.rozloha }} km<sup>2</sup>
                 <br> <b><em>Forma státu:</em></b> {{ stat_detail.forma_statu }}
+
+                {% if perms.koronavirus.change_stat %}
+                    <br>
+                    <a href="{% url 'stat_update' stat_detail.pk %}"><i class="fas fa-pencil-alt"></i></a>
+                {% endif %}
+                {% if perms.koronavirus.delete_stat %}
+                 <a href="{% url 'stat_delete' stat_detail.pk %}"><i class="fas fa-times-circle" style="color: red !important;"></i></a>
+                {% endif %}
+
             </div>
         </div>
         <div class="row">
@@ -36,10 +45,5 @@
     </div>
     <div class="col-lg-2"></div>
 </div>
-
-
-<a href="{% url 'stat_update' stat_detail.pk %}" class="btn btn-primary">Editovat stát</a>
-<a href="{% url 'stat_delete' stat_detail.pk %}" class="btn btn-danger">Smazat stát</a>
-
 
 {% endblock %}

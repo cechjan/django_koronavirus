@@ -8,7 +8,7 @@
   </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link active" href="{% url 'index' %}" id="uvod-stranka">Úvodní stránka</a>
@@ -19,6 +19,23 @@
 <!--      <li class="nav-item">-->
 <!--        <a class="nav-link" href="#">Nakaženi</a>-->
 <!--      </li>-->
+
+      {% if user.is_authenticated %}
+            <div class="row" style="margin-left: 10px !important;">
+                {% if user.is_superuser %}
+                    <li class="nav-item"><a href="/admin" class="nav-link"><i class="far fa-user"></i> {{ user.get_username }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link"><i class="far fa-user"></i> {{ user.get_username }}</a></li>
+                {% endif %}
+                <li class="nav-item"><a href="{% url 'logout'%}" class="nav-link">Odhlásit se</a></li>
+            </div>
+           {% else %}
+            <div class="row" style="margin-left: 10px !important;">
+              <li class="nav-item"><a href="{% url 'login'%}?next={{request.path}}" class="nav-link">Přihlásit se</a></li>
+              <li class="nav-item"><a href="{% url 'signup'%}?next={{request.path}}" class="nav-link">Zaregistrovat se</a></li>
+            </div>
+      {% endif %}
+
     </ul>
   </div>
 </nav>

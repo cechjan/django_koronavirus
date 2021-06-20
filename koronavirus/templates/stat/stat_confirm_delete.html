@@ -8,14 +8,26 @@
         <h2 class="display-5 text-center">Smazání státu</h2>
     </div>
 </div>
-<div class="mt-5 mb-3" style="text-align-last: center">
-    <h2>Jste si jistí, že chcete vymazat stát <a href="../" class="text-green" style="font-weight: bold; text-decoration: underline;">{{ stat }}</a> z databáze?</h2>
 
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="submit" value="Ano, smazat.">
-    </form>
+{% if perms.koronavirus.change_stat %}
+    <div class="mt-5 mb-3" style="text-align-last: center">
+        <h2>Jste si jistí, že chcete vymazat stát <a href="../" class="text-green" style="font-weight: bold; text-decoration: underline;">{{ stat }}</a> z databáze?</h2>
 
-</div>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Ano, smazat.">
+        </form>
+
+    </div>
+
+{% else %}
+    <h3 style="text-align: center">Na tuto akci nemáte dostatečné práva</h3>
+    <script>
+        window.onload = function() {
+            // window.location.href = "/";
+            window.history.back();
+        }
+    </script>
+{% endif %}
 
 {% endblock %} 

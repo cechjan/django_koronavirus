@@ -4,6 +4,8 @@ from koronavirus.models import Stat, Nakazeni, Naockovani
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy, reverse
 from koronavirus.forms import StatModelForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 def index(request):
@@ -60,17 +62,23 @@ class StatDetailView(DetailView):
     template_name = 'stat/detail.html'  # Specify your own template name/location
 
 
-class StatCreateView(CreateView):
+class StatCreateView(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
     model = Stat
     fields = ['nazev_statu', 'zkratka_statu', 'vlajka', 'forma_statu', 'pocet_obyvatel', 'rozloha', 'text']
+    template_name = 'stat/update.html'
+    success_url = reverse_lazy('index')
+
+    permission_required = 'koronavirus.add_stat'
 
 
-class StatUpdateView(UpdateView):
+class StatUpdateView(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
     model = Stat
     # fields = '__all__'
     form_class = StatModelForm
     context_object_name = 'stat'
     template_name = 'stat/update.html'
+
+    permission_required = 'koronavirus.change_stat'
 
     # success_url = f"/koronavirus/staty/{}/"
 
@@ -78,8 +86,27 @@ class StatUpdateView(UpdateView):
         return self.request.path[:-7]
 
 
-class StatDeleteView(DeleteView):
+class StatDeleteView(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
     model = Stat
     context_object_name = 'stat'
     template_name = 'stat/stat_confirm_delete.html'
     success_url = reverse_lazy('index')
+
+    permission_required = 'koronavirus.delete_stat'
+
+
+def error_500(request):
+    return render(request, 'errors/500.html')
+
+
+def error_404(request, exception=None):
+    return render(request, 'errors/404.html')
+
+
+def error_403(request, exception=None):
+    return render(request, 'errors/403.html')
+
+
+def error_400(request, exception=None):
+    return render(request, 'errors/400.html')
+

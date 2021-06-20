@@ -1,19 +1,17 @@
 {% extends "base.html" %}
+
 {% load widget_tweaks %}
-{% block title %}Úprava {{ stat }}{% endblock %}
 
 {% block content %}
 <div class="row mb-3">
     <div class="col-sm-12 bg-orange">
-        <h2 class="display-5 text-center">Úprava: <span class="text-white">{{ stat }}</span></h2>
+        <h2 class="display-5 text-center">Registrace nového uživatele</h2>
     </div>
 </div>
-{% if perms.koronavirus.change_stat %}
-<div class="row mt-5 mb-3">
+<div class="row mb-3">
     <div class="container">
-        <form method="post" novalidate enctype="multipart/form-data">
-            {% csrf_token %}
-
+      <form method="post">
+        {% csrf_token %}
             {% for hidden_field in form.hidden_fields %}
               {{ hidden_field }}
             {% endfor %}
@@ -51,25 +49,16 @@
             </div>
             {% endfor %}
 
-            <button class="btn btn-secondary">Zrušit</button>
-            <button id="submit-button" class="btn btn-primary bg-green" type="submit">Potvrdit</button>
-        </form>
-    </div>
-
+            <div class="input-group mb-3">
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+            </div>
+            <button class="btn btn-primary bg-green" type="submit">Zaregistrovat</button>
+            <button class="btn btn-secondary" onclick="javascript:history.back();">Zrušit</button>
+      </form>
     </div>
 </div>
-{% else %}
-    <h3 style="text-align: center">Na tuto akci nemáte dostatečné práva</h3>
-    <script>
-        window.onload = function() {
-            // window.location.href = "/";
-            window.history.back();
-        }
-    </script>
-{% endif %}
-
 {% endblock %}
 
 {% block scripts %}
-<script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 {% endblock %}

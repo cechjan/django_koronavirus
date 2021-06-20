@@ -54,8 +54,10 @@
     <div class="col-sm-11">
         <strong>Celkový počet států:</strong> {{ num_stat }}
     </div>
-    <div>
-        <a href="{% url 'stat_create' %}" class="btn btn-success">Nový stát</a>
-    </div>
+    {% if perms.koronavirus.add_stat %}
+        <div>
+            <a href="{% url 'stat_create' %}" style="font-size: 20px; color: lightsalmon;"><i class="fas fa-plus-circle"></i>&nbsp;Přidat stát</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
